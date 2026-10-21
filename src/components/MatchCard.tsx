@@ -33,7 +33,7 @@ export function MatchCard({ match, isFavorite, onToggleFavorite }: Props) {
             <View style={styles.favoriteAbsolute}>
                 <FavoriteButton active={isFavorite} onPress={onToggleFavorite} />
             </View>
-            <View style={[styles.teamRow, styles.firstTeamRow]}>
+            <View style={styles.teamRow}>
                 <View style={styles.teamInfo}>
                     <Text style={styles.role}>Хозяева</Text>
                     <Text style={styles.teamName}>{match.home.name}</Text>
