@@ -1,10 +1,12 @@
-
 import { StyleSheet, Text, View } from 'react-native';
 import type { Match } from '../types/match';
 import { formatMatchDate, getMatchStatus } from '../utils/matches';
+import { FavoriteButton } from './FavoriteButton';
 
 type Props = {
     match: Match;
+    isFavorite: boolean;
+    onToggleFavorite: () => void;
 };
 
 function getStatusStyle(status: Match['status']) {
@@ -22,12 +24,15 @@ function getStatusStyle(status: Match['status']) {
     }
 }
 
-export function MatchCard({ match }: Props) {
+export function MatchCard({ match, isFavorite, onToggleFavorite }: Props) {
     const date = formatMatchDate(match.startsAt);
     const isDateUnknown = date === 'Дата уточняется' || date === 'Дата неизвестна';
 
     return (
         <View style={styles.card}>
+            <View style={styles.favoriteRow}>
+                <FavoriteButton active={isFavorite} onPress={onToggleFavorite} />
+            </View>
             <View style={styles.teamRow}>
                 <View style={styles.teamInfo}>
                     <Text style={styles.role}>Хозяева</Text>
@@ -151,5 +156,10 @@ const styles = StyleSheet.create({
     unknownStatus: {
         color: '#374151',
         backgroundColor: '#f3f4f6',
+    },
+    favoriteRow: {
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        marginBottom: 4,
     },
 });

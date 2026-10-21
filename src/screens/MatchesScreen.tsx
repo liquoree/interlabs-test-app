@@ -1,10 +1,10 @@
-
 import { useMemo, useState } from 'react';
 import { ActivityIndicator, FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 import { MatchCard } from '../components/MatchCard';
 import { UpdatedAgo } from '../components/UpdatedAgo';
 import { useMatches } from '../hooks/useMatches';
 import { filterMatches, type MatchFilter } from '../utils/matches';
+import { useFavorites } from '../hooks/useFavorites';
 
 const FILTERS: { value: MatchFilter; label: string }[] = [
   { value: 'all', label: 'Все' },
@@ -14,6 +14,8 @@ const FILTERS: { value: MatchFilter; label: string }[] = [
 
 export function MatchesScreen() {
   const { data, isLoading, isRefreshing, error, updatedAt, refresh } = useMatches();
+  const { favorites, isFavorite, toggle } = useFavorites();
+
   const [filter, setFilter] = useState<MatchFilter>('all');
 
   const visibleMatches = useMemo(
@@ -90,8 +92,15 @@ export function MatchesScreen() {
           ) : (
               <FlatList
                   data={visibleMatches}
+                  extraData={favorites}
                   keyExtractor={item => item.id}
-                  renderItem={({ item }) => <MatchCard match={item} />}
+                  renderItem={({ item }) => (
+                      <MatchCard
+                          match={item}
+                          isFavorite={isFavorite(item.id)}
+                          onToggleFavorite={() => toggle(item.id)}
+                      />
+                  )}
                   contentContainerStyle={styles.list}
                   ItemSeparatorComponent={() => <View style={styles.separator} />}
                   ListEmptyComponent={
