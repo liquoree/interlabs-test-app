@@ -1,4 +1,3 @@
-
 import type { Match, MatchScore, MatchesResponse, Team } from '../types/match';
 
 function isRecord(value: unknown): value is Record<string, unknown> {

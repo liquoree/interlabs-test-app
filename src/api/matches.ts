@@ -1,4 +1,3 @@
-
 import { MATCHES_URL } from '../config';
 import type { MatchesResponse } from '../types/match';
 import { isMatchesResponse } from './matches.validation';
