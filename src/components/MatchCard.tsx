@@ -80,6 +80,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginBottom: 14,
         gap: 12,
+        paddingRight: 25,
     },
     teamInfo: {
         flex: 1,
@@ -163,7 +164,4 @@ const styles = StyleSheet.create({
         right: 16,
         zIndex: 1,
     },
-    firstTeamRow: {
-        paddingRight: 40,
-    }
 });
