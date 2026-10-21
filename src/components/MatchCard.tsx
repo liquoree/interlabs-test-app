@@ -30,10 +30,10 @@ export function MatchCard({ match, isFavorite, onToggleFavorite }: Props) {
 
     return (
         <View style={styles.card}>
-            <View style={styles.favoriteRow}>
+            <View style={styles.favoriteAbsolute}>
                 <FavoriteButton active={isFavorite} onPress={onToggleFavorite} />
             </View>
-            <View style={styles.teamRow}>
+            <View style={[styles.teamRow, styles.firstTeamRow]}>
                 <View style={styles.teamInfo}>
                     <Text style={styles.role}>Хозяева</Text>
                     <Text style={styles.teamName}>{match.home.name}</Text>
@@ -157,9 +157,13 @@ const styles = StyleSheet.create({
         color: '#374151',
         backgroundColor: '#f3f4f6',
     },
-    favoriteRow: {
-        flexDirection: 'row',
-        justifyContent: 'flex-end',
-        marginBottom: 4,
+    favoriteAbsolute: {
+        position: 'absolute',
+        top: 12,
+        right: 16,
+        zIndex: 1,
     },
+    firstTeamRow: {
+        paddingRight: 40,
+    }
 });
